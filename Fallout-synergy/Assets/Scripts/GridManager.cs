@@ -29,11 +29,11 @@ public class GridManager : MonoBehaviour
 	void generateGrid() {
 		for(int x = 0; x < width; x++) {
 			for(int y = 0; y < width; y++) {
-                var spawnedTile = Instantiate(tilePrefab, new Vector3(x, y), Quaternian.identity);
-                spawnedTile.name = $"Tile {x} {y}";
-            }
+                		var spawnedTile = Instantiate(tilePrefab, new Vector3(x, y), Quaternian.identity);
+                		spawnedTile.name = $"Tile {x} {y}";
+            		}
 		}
-        cam.transform.position = new Vector3((float)width/2 - .5f, float)height/2 - .5f, -10)
+        	cam.transform.position = new Vector3((float) width / 2 - .5f, (float) height / 2 - .5f, -10);
 	}
 }
 
