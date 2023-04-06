@@ -1,10 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
+using Unity.VisualScripting;
+using UnityEditor.Build.Content;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class GridManager : MonoBehaviour {
+public class GridManager : MonoBehaviour
+{
+    public static GridManager Instance;
     [SerializeField] private int width, height;
  
     [SerializeField] private Tile grassTile, mountainTile;
@@ -12,12 +17,12 @@ public class GridManager : MonoBehaviour {
     [SerializeField] private Transform cam;
  
     private Dictionary<Vector2, Tile> _tiles;
- 
-    void Start() {
-        GenerateGrid();
+
+    void Awake() {
+        Instance = this;
     }
  
-    void GenerateGrid() {
+    public void GenerateGrid() {
         _tiles = new Dictionary<Vector2, Tile>();
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -31,8 +36,10 @@ public class GridManager : MonoBehaviour {
                 _tiles[new Vector2(x, y)] = spawnedTile;
             }
         }
- 
+        
         cam.transform.position = new Vector3((float)width/2 -0.5f, (float)height / 2 - 0.5f,-10);
+        StateManager.ChangeState(StateManager.GameStateOptions.SpawnChamps);
+
     }
  
     public Tile GetTileAtPosition(Vector2 pos) {
