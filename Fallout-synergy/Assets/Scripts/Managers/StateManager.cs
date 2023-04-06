@@ -6,7 +6,7 @@ namespace DefaultNamespace
     public class StateManager : MonoBehaviour
     {
         public static StateManager Instance;
-        public static GameStateOptions currentState;
+        public static GameStateOptions GameStateOption;
 
         void Awake()
         {
@@ -21,15 +21,17 @@ namespace DefaultNamespace
         public static void ChangeState(GameStateOptions newState)
         {
         
-            currentState = newState;
+            GameStateOption = newState;
             switch (newState)
             {
                 case GameStateOptions.GenerateGrid:
                     GridManager.Instance.GenerateGrid();
                     break;
                 case GameStateOptions.SpawnEnemy:
+                    UnitManager.Instance.SpawnChamps();
                     break;
                 case GameStateOptions.SpawnChamps:
+                    UnitManager.Instance.SpawnEnemies();
                     break;
                 case GameStateOptions.ChampTurns:
                     break;
@@ -39,14 +41,13 @@ namespace DefaultNamespace
                     throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
             }
         }
-
-        public enum GameStateOptions
-        {
-            GenerateGrid = 0,
-            SpawnEnemy = 1,
-            SpawnChamps = 2,
-            ChampTurns = 3,
-            EnemyTurns = 4
-        }
+    }
+    public enum GameStateOptions
+    {
+        GenerateGrid = 0,
+        SpawnEnemy = 1,
+        SpawnChamps = 2,
+        ChampTurns = 3,
+        EnemyTurns = 4
     }
 }
