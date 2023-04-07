@@ -38,17 +38,17 @@ public class GridManager : MonoBehaviour
         }
         
         cam.transform.position = new Vector3((float)width/2 -0.5f, (float)height / 2 - 0.5f,-10);
-        StateManager.ChangeState(GameStateOptions.SpawnChamps);
+        StateManager.Instance.ChangeState(GameStateOptions.SpawnChamps);
 
     }
 
     public Tile GetHeroSpawnTile()
     {
-        return _tiles.Where(t=>t.Key.x < width/2 && t.Value.Walkable).OrderBy(t=>Random.value).First().Value;
+        return _tiles.Where(t=>t.Key.x < width / 2 && t.Value.Walkable).OrderBy(t=>Random.value).First().Value;
     }
     public Tile GetEnemySpawnTile()
     {
-        return _tiles.Where(t=>t.Key.x > width/2 && t.Value.Walkable).OrderBy(t=>Random.value).First().Value;
+        return _tiles.Where(t=>t.Key.x > width / 2 && t.Value.Walkable).OrderBy(t=>Random.value).First().Value;
     }
     
     public Tile GetTileAtPosition(Vector2 pos) {

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Units.Champions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +8,7 @@ public class MenuManager : MonoBehaviour
     public static MenuManager Instance;
 
     [SerializeField] private GameObject selectedHeroObject, tileObject, tileUnitObject;
-    void awake()
+    void Awake()
     {
         Instance = this;
     }

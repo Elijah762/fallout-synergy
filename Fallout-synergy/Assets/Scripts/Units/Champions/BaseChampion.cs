@@ -1,9 +1,7 @@
+using Units;
 using UnityEngine;
 
-namespace Units.Champions
+public class BaseChampion : BaseUnit
 {
-    public class BaseChampion : BaseUnit
-    {
-        
-    }
+    
 }

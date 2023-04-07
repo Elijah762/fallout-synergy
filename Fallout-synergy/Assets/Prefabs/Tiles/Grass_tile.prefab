@@ -79,10 +79,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8578741a1ad824471905eb6cdb8b98b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseColor: {r: 0.380429, g: 0.7830189, b: 0.39388475, a: 1}
-  _offsetColor: {r: 0.34376115, g: 0.7075472, b: 0.35446075, a: 1}
+  TileName: Ground
   _renderer: {fileID: 848956730945157160}
   _highlight: {fileID: 2229188486143825758}
+  isWalkable: 1
+  occupiedUnit: {fileID: 0}
+  _baseColor: {r: 0.380429, g: 0.7830189, b: 0.39388475, a: 1}
+  _offsetColor: {r: 0.34376115, g: 0.7075472, b: 0.35446075, a: 1}
 --- !u!1 &2229188486143825758 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7043597135452053128, guid: 656d4b73f6a0b4f60a11be591eb8ae54, type: 3}

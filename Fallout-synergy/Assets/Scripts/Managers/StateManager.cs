@@ -5,19 +5,19 @@ using UnityEngine;
 public class StateManager : MonoBehaviour
 {
     public static StateManager Instance;
-    public static GameStateOptions GameStateOption;
+    public  GameStateOptions GameStateOption;
 
     void Awake()
     {
         Instance = this;
     }
 
-    void start()
+    void Start()
     {
         ChangeState(GameStateOptions.GenerateGrid);
     }
 
-    public static void ChangeState(GameStateOptions newState)
+    public void ChangeState(GameStateOptions newState)
     {
     
         GameStateOption = newState;
@@ -26,10 +26,10 @@ public class StateManager : MonoBehaviour
             case GameStateOptions.GenerateGrid:
                 GridManager.Instance.GenerateGrid();
                 break;
-            case GameStateOptions.SpawnEnemy:
+            case GameStateOptions.SpawnChamps:
                 UnitManager.Instance.SpawnChamps();
                 break;
-            case GameStateOptions.SpawnChamps:
+            case GameStateOptions.SpawnEnemy:
                 UnitManager.Instance.SpawnEnemies();
                 break;
             case GameStateOptions.ChampTurns:

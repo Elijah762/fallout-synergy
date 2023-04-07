@@ -1,9 +1,7 @@
+using Units;
 using UnityEngine;
 
-namespace Units.Enemies
+public class BaseEnemy : BaseUnit
 {
-    public class BaseEnemy : BaseUnit
-    {
-        
-    }
+    
 }

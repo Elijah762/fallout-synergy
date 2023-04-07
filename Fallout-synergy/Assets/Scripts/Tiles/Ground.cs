@@ -5,7 +5,6 @@ using UnityEngine;
 public class Ground : Tile
 {
     [SerializeField] private Color _baseColor, _offsetColor;
-    // Start is called before the first frame update
     public override void Init(int x, int y)
     {
         var isOffset = (x + y) % 2 == 1;

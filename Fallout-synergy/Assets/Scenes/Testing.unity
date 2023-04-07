@@ -289,6 +289,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 381607717}
+  - component: {fileID: 381607718}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -311,6 +312,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &381607718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 381607716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f3826a02a34646238bc7df29b6e85e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedHeroObject: {fileID: 1338593257}
+  tileObject: {fileID: 310298375}
+  tileUnitObject: {fileID: 1798172283}
 --- !u!1 &400004294
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,6 +882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddb7d20ad705436499669e75419f90ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectedChampion: {fileID: 0}
 --- !u!4 &1436781932
 Transform:
   m_ObjectHideFlags: 0
@@ -910,6 +927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 444857e812e4443ea71bde6babc1db8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameStateOption: 0
 --- !u!4 &1735537543
 Transform:
   m_ObjectHideFlags: 0

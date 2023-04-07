@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Units;
-using Units.Champions;
-using Units.Enemies;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -30,10 +28,10 @@ namespace Managers
             {
                 var randomPrefab = GetRandomUnit<BaseChampion>(Faction.Champ);
                 var spawnedHero = Instantiate(randomPrefab);
-                var randomSpawnTile = new Vector3(); //GridManager.Instance.GetHeroSpawnTile();
-                //randomSpawnTile.SetUnit(spawnedHero);
+                var randomSpawnTile = GridManager.Instance.GetHeroSpawnTile();
+                randomSpawnTile.SetUnit(spawnedHero);
             }
-            //StateManager.ChangeState(GameStateOptions.SpawnEnemies);
+            StateManager.Instance.ChangeState(GameStateOptions.SpawnEnemy);
         }
 
         public void SpawnEnemies()
@@ -43,10 +41,10 @@ namespace Managers
             {
                 var randomPrefab = GetRandomUnit<BaseEnemy>(Faction.Enemy);
                 var spawnedEnemy = Instantiate(randomPrefab);
-                var randomSpawnTile = new Vector3(); //GridManager.Instance.GetEnemySpawnTile();
-                //randomSpawnTile.SetUnit(spawnedEnemy);
+                var randomSpawnTile = GridManager.Instance.GetEnemySpawnTile();
+                randomSpawnTile.SetUnit(spawnedEnemy);
             }
-            //StateManager.ChangeState(GameStateOptions.ChampTurns);
+            StateManager.Instance.ChangeState(GameStateOptions.ChampTurns);
         }
         
         private T GetRandomUnit<T>(Faction faction) where T : BaseUnit
