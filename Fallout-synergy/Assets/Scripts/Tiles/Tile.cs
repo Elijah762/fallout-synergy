@@ -21,18 +21,18 @@ public abstract class Tile : MonoBehaviour
  
     void OnMouseEnter() {
         _highlight.SetActive(true);
-        //MenuManager.Instance.ShowTileInfo(this);
+        MenuManager.Instance.ShowTileInfo(this);
     }
  
     void OnMouseExit()
     {
         _highlight.SetActive(false);
-        //MenuManager.Instance.ShowTileInfo(null);
+        MenuManager.Instance.ShowTileInfo(null);
     }
 
     private void OnMouseDown()
     {
-        //if (GameManager.Instance.GameState != GameStateOptions.ChampTurns) return;
+        if (GameManager.Instance.GameState != GameStateOptions.ChampTurns) return;
         if (occupiedUnit != null)
         {
             if (occupiedUnit.Faction == Faction.Champ)

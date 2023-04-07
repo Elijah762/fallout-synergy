@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Units.Champions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,7 @@ public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance;
 
-    [SerializeField] private Gameobject selectedHeroObject, tileObject, tileUnitObject;
+    [SerializeField] private GameObject selectedHeroObject, tileObject, tileUnitObject;
     void awake()
     {
         Instance = this;
@@ -25,9 +26,9 @@ public class MenuManager : MonoBehaviour
         tileObject.GetComponentInChildren<Text>().text = tile.TileName;
         tileObject.SetActive(true);
 
-        if (tile.OccupiedUnit)
+        if (tile.occupiedUnit)
         {
-            tileUnitObject.GetComponentInChildren<Text>().text = tile.OccupiedUnit.UnitName;
+            tileUnitObject.GetComponentInChildren<Text>().text = tile.occupiedUnit.UnitName;
             tileUnitObject.SetActive(true);
         }
     }

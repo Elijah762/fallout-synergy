@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using DefaultNamespace;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor.Build.Content;
 using UnityEngine;
@@ -44,11 +44,11 @@ public class GridManager : MonoBehaviour
 
     public Tile GetHeroSpawnTile()
     {
-        return _tiles.where(t=>t.Key.x < width/2 && t.Value.Walkable).OrderBy(t=>Random.value).First().Value;
+        return _tiles.Where(t=>t.Key.x < width/2 && t.Value.Walkable).OrderBy(t=>Random.value).First().Value;
     }
     public Tile GetEnemySpawnTile()
     {
-        return _tiles.where(t=>t.Key.x > width/2 && t.Value.Walkable).OrderBy(t=>Random.value).First().Value;
+        return _tiles.Where(t=>t.Key.x > width/2 && t.Value.Walkable).OrderBy(t=>Random.value).First().Value;
     }
     
     public Tile GetTileAtPosition(Vector2 pos) {
