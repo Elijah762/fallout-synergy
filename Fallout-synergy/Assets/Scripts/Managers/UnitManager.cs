@@ -15,6 +15,7 @@ namespace Managers
 
         private List<Scri> _units;
 
+        public BaseChampion SelectedChampion;
         private void Awake()
         {
             Instance = this;
@@ -53,5 +54,10 @@ namespace Managers
             return (T)_units.Where(u => u.Faction == faction).OrderBy(o => Random.value).First().unitPrefab;
         }
 
+        public void SetSelectedHero(BaseChampion champion)
+        {
+            SelectedChampion = champion;
+            //MenuManager.Instance.ShowSelectedChamp(SelectedChampion);
+        }
     }
 }
