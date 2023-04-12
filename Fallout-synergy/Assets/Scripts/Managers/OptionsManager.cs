@@ -19,6 +19,19 @@ public class OptionsManager : MonoBehaviour
         fullscreenTog.isOn = Screen.fullScreen;
 
         vsyncTog.isOn = QualitySettings.vSyncCount != 0;
+
+        bool foundResolution = false;
+        for (int i = 0; i < resolutions.Count; i++)
+        {
+            if (Screen.width == resolutions[i].horizontal && Screen.height == resolutions[i].vertical)
+            {
+                foundResolution = true;
+
+                selectedResolution = i;
+                
+                UpdateResLabel();
+            }
+        }
     }
 
     // Update is called once per frame
