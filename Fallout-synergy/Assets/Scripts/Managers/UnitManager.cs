@@ -55,6 +55,7 @@ namespace Managers
         public void SetSelectedHero(BaseChampion champion)
         {
             SelectedChampion = champion;
+            Debug.Log("Champion: " + champion.name);
             //MenuManager.Instance.ShowSelectedChamp(SelectedChampion);
         }
     }

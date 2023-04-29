@@ -11,9 +11,11 @@ public abstract class Tile : MonoBehaviour
     [SerializeField] protected SpriteRenderer _renderer;
     [SerializeField] private GameObject _highlight;
     [SerializeField] private bool isWalkable;
-
+    [SerializeField] private bool isSolid;
+    
     public BaseUnit occupiedUnit;
     public bool Walkable => isWalkable && occupiedUnit == null;
+    public bool Solid => isSolid && occupiedUnit == null;
     
     public virtual void Init(int x, int y) {}
  
@@ -53,9 +55,13 @@ public abstract class Tile : MonoBehaviour
 
     }
 
+    
+
     public void SetUnit(BaseUnit unit)
     {
+        if (!isWalkable) return;
         if (unit.OccupiedTile != null) unit.OccupiedTile.occupiedUnit = null;
+
         unit.transform.position = transform.position;
         occupiedUnit = unit;
         unit.OccupiedTile = this;
