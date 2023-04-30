@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7622505490326105618}
-  - component: {fileID: 7622505490326105619}
+  - component: {fileID: 6224569013961933066}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7622505490326105619
+--- !u!114 &6224569013961933066
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,14 +42,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7622505490326105617}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cae19ec1dc8297a459ed794d5180ada6, type: 3}
+  m_Script: {fileID: 11500000, guid: ce07e909bd87a2644a96189790a109c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCam: {fileID: 0}
   bullet: {fileID: 1510730497147980644, guid: 8944facd81c9e4045ab51bdb7900f348, type: 3}
+  bulletNum: 1
   bulletTransform: {fileID: 7622505490448732457}
   canFire: 1
-  timeBetweenFiring: 0.3
+  timeBetweenFiring: 0.2
 --- !u!1 &7622505490448732456
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,18 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class WeaponManager : MonoBehaviour
+public class BaseWeapon : MonoBehaviour
 {
     private Camera _mainCam;
 
     private Vector3 _mousePos;
 
     public GameObject bullet;
+    [SerializeField] public int bulletNum;
     public Transform bulletTransform;
     public bool canFire;
     private float _timer;
     public float timeBetweenFiring;
+
+    [SerializeField] private ParticleSystem particleSystem;
 
     private void Start()
     {
@@ -36,13 +40,26 @@ public class WeaponManager : MonoBehaviour
             {
                 canFire = true;
                 _timer = 0;
+                particleSystem.Stop();
             }
         }
         
         if (Input.GetMouseButton(0) && canFire)
         {
-            canFire = false;
-            Instantiate(bullet, bulletTransform.position, Quaternion.identity);
+            SpawnBullet();
         }
+    }
+
+    private void SpawnBullet()
+    {
+        for (int i = 0; i < bulletNum; i++)
+        {
+            Vector3 bulletPosition = new Vector3(Random.Range(bulletTransform.position.x - .5f, bulletTransform.position.x + .5f), 
+                Random.Range(bulletTransform.position.y - .5f, bulletTransform.position.y + .5f), bulletTransform.position.z);
+            Instantiate(bullet, bulletPosition, Quaternion.identity);
+        }
+
+        canFire = false;
+        particleSystem.Play();
     }
 }
