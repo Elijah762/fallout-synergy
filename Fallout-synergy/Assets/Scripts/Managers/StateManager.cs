@@ -24,13 +24,16 @@ public class StateManager : MonoBehaviour
         switch (newState)
         {
             case GameStateOptions.GenerateGrid:
-                GridManager.Instance.GenerateGrid();
+                GameManager.Instance.GenerateGrid();
                 break;
             case GameStateOptions.SpawnChamps:
                 UnitManager.Instance.SpawnChamps();
                 break;
             case GameStateOptions.SpawnEnemy:
                 UnitManager.Instance.SpawnEnemies();
+                break;
+            case GameStateOptions.VerifyTiles:
+                GameManager.Instance.VerifyTiles();
                 break;
             case GameStateOptions.ChampTurns:
                 break;
@@ -46,6 +49,7 @@ public enum GameStateOptions
     GenerateGrid = 0,
     SpawnEnemy = 1,
     SpawnChamps = 2,
-    ChampTurns = 3,
-    EnemyTurns = 4
+    VerifyTiles = 3,
+    ChampTurns = 4,
+    EnemyTurns = 5
 }

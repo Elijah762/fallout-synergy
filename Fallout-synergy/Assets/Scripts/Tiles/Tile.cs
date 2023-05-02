@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using Managers;
 using Units;
 using UnityEngine;
- 
+
 public abstract class Tile : MonoBehaviour
 {
     public string TileName;
     [SerializeField] protected SpriteRenderer _renderer;
     [SerializeField] private GameObject _highlight;
-    [SerializeField] private bool isWalkable;
+    [SerializeField] public bool isWalkable;
     [SerializeField] private bool isSolid;
     
     public BaseUnit occupiedUnit;
@@ -30,7 +30,7 @@ public abstract class Tile : MonoBehaviour
         //MenuManager.Instance.ShowTileInfo(null);
     }
 
-    void OnMouseDown() {
+    /*void OnMouseDown() {
         if(StateManager.Instance.GameStateOption != GameStateOptions.ChampTurns) return;
 
         if (occupiedUnit != null) {
@@ -48,21 +48,21 @@ public abstract class Tile : MonoBehaviour
         }
         else {
             if (UnitManager.Instance.SelectedChampion != null) {
-                SetUnit(UnitManager.Instance.SelectedChampion);
+                SetUnit(UnitManager.Instance.SelectedChampion, );
                 UnitManager.Instance.SetSelectedHero(null);
             }
         }
 
-    }
+    }*/
 
     
 
-    public void SetUnit(BaseUnit unit)
+    public void SetUnit(BaseUnit unit, Vector3 pos)
     {
         if (!isWalkable) return;
         if (unit.OccupiedTile != null) unit.OccupiedTile.occupiedUnit = null;
 
-        unit.transform.position = transform.position;
+        unit.transform.position = pos;
         occupiedUnit = unit;
         unit.OccupiedTile = this;
     }

@@ -27,9 +27,11 @@ namespace Managers
             for (int i = 0; i < heroCount; i++)
             {
                 var randomPrefab = GetRandomUnit<BaseChampion>(Faction.Champ);
-                var spawnedHero = Instantiate(randomPrefab);
-                var randomSpawnTile = GridManager.Instance.GetHeroSpawnTile();
-                randomSpawnTile.SetUnit(spawnedHero);
+                int x, y;
+                GameManager.Instance.SetHeroSpawnTile(randomPrefab, out x, out y);
+                
+                randomPrefab = Instantiate(randomPrefab);
+                randomPrefab.transform.position = new Vector3(x, y) * 10f + Vector3.one * 5f;
             }
             StateManager.Instance.ChangeState(GameStateOptions.SpawnEnemy);
         }
@@ -40,11 +42,13 @@ namespace Managers
             for (int i = 0; i < enemyCount; i++)
             {
                 var randomPrefab = GetRandomUnit<BaseEnemy>(Faction.Enemy);
-                var spawnedEnemy = Instantiate(randomPrefab);
-                var randomSpawnTile = GridManager.Instance.GetEnemySpawnTile();
-                randomSpawnTile.SetUnit(spawnedEnemy);
+                int x, y;
+                GameManager.Instance.SetEnemySpawnTile(randomPrefab, out x, out y);
+                
+                randomPrefab = Instantiate(randomPrefab);
+                randomPrefab.transform.position = new Vector3(x, y) * 10f + Vector3.one * 5f;
             }
-            StateManager.Instance.ChangeState(GameStateOptions.ChampTurns);
+            StateManager.Instance.ChangeState(GameStateOptions.VerifyTiles);
         }
         
         private T GetRandomUnit<T>(Faction faction) where T : BaseUnit

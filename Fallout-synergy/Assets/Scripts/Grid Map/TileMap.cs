@@ -2,32 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UI_Elements;
+using Units;
 
 public class TileMap
 {
     private Grid<BaseTile> grid;
     private Tile grassTile;
-    private Tile[, ] tileGrid;
     public TileMap(int width, int height)
     {
         grid = new Grid<BaseTile>(width, height, 10f, Vector3.zero,
             (Grid<BaseTile> g, int x, int y) => new BaseTile(g, x, y));
-
-        tileGrid = new Tile[width, height];
     }
-
-    public void SetTileMapTile(Vector3 pos, Tile tileSprite)
-    {
-        BaseTile baseTile = grid.GetGridObject(pos);
-        Vector3 temp = pos / 10f - Vector3.one / 5f;
-        if (baseTile != null)
-        {
-            Tile newTile = baseTile.SetTileSprite(tileSprite, grassTile);
-            tileGrid[(int)temp.x, (int)temp.y] = newTile;
-
-        }
-    }
-
+    
     public void SetMap(List<Tile> tiles)
     {
         for (int x = 0; x < grid.GetWidth(); x++)
@@ -40,9 +26,43 @@ public class TileMap
         }
     }
     
+    public void DestroyMap()
+    {
+        for (int x = 0; x < grid.GetWidth(); x++)
+        {
+            for (int y = 0; y < grid.GetHeight(); y++)
+            {
+                DestroyTile(new Vector3(x, y) * 10f + Vector3.one * 5f);
+            }
+        }
+    }
+    
+    public void SetTileMapTile(Vector3 pos, Tile tileSprite)
+    {
+        BaseTile baseTile = grid.GetGridObject(pos);
+        if (baseTile != null)
+        {
+            baseTile.SetTileSprite(tileSprite);
+        }
+    }
+    
+    public void DestroyTile(Vector3 pos)
+    {
+        BaseTile baseTile = grid.GetGridObject(pos);
+        baseTile.Delete();
+    }
+    
     public Tile GetTile(int x, int y)
     {
-        return tileGrid[x, y];
+        BaseTile baseTile = grid.GetGridObject(x, y);
+        return baseTile.GetTile();
+    }
+
+    public void SetTileUnit(BaseUnit unit, int x, int y)
+    {
+        Debug.Log("Setting hero at " + x + ", " + y);
+        BaseTile baseTile = grid.GetGridObject(x, y);
+        baseTile.SetTileUnit(unit);
     }
 
     public void Save()

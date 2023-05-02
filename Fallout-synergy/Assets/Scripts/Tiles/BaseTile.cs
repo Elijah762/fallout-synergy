@@ -16,13 +16,37 @@ public class BaseTile
         this.y = y;
     }
 
-    public Tile SetTileSprite(Tile tileSprite, Tile tile)
+    public void SetTileSprite(Tile tile)
     {
-        Tile tempTile = GameObject.Instantiate(tileSprite, new Vector3(x, y)* 10f + Vector3.one * 5f, Quaternion.identity) as Tile;
-        _tile = tempTile;
-        return tempTile;
+        if (!_tile)
+        {
+            Tile tempTile =
+                GameObject.Instantiate(tile, new Vector3(x, y) * 10f + Vector3.one * 5f, Quaternion.identity) as Tile;
+            _tile = tempTile;
+        }
+        else
+        {
+            GameObject.Destroy(_tile);
+            Tile tempTile = 
+                GameObject.Instantiate(tile, new Vector3(x, y) * 10f + Vector3.one * 5f, Quaternion.identity) as Tile;
+            _tile = tempTile;
+        }
     }
 
+    public Tile GetTile()
+    {
+        return _tile;
+    }
+
+    public void SetTileUnit(BaseUnit unit)
+    {
+        _tile.occupiedUnit = unit;
+    }
+
+    public void Delete()
+    { 
+        GameObject.Destroy(_tile);
+    }
     public override string ToString()
     {
         return "";
