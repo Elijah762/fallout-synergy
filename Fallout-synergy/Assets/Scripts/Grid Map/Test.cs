@@ -7,26 +7,24 @@ using UI_Elements;
 public class Test : MonoBehaviour
 {
     private Grid<HeatMapGridObject> grid;
-    private Grid<StringGridObject> stringGrid;
     [SerializeField] private Camera _camera;
     private PathFinding pathFinding;
     private TileMap _tileMap;
     [SerializeField] private List<Tile> tiles;
     private void Start()
     {
-        _tileMap = new TileMap(3, 3);
+        _tileMap = new TileMap(5, 5);
         _tileMap.SetMap(tiles);
-        //pathFinding = new PathFinding(3, 3);
+        _camera.transform.position = new Vector3((float)5/2 -0.5f, (float)5 / 2 - 0.5f,-10);
+        pathFinding = new PathFinding(5, 5);
+        LineGrids();
+        
     }
 
     private void Update()
     {
         Vector3 pos = UserInput.GetMouseWorldPosition(_camera);
         if (Input.GetMouseButtonDown(0))
-        {
-            _tileMap.SetTileMapTile(pos, tiles[0]);
-        }
-        /*if (Input.GetMouseButtonDown(0))
         {
             pathFinding.GetGrid().GetXY(pos, out int x, out int y);
             List<PathNode> path= pathFinding.FindPath(0, 0, x, y);
@@ -43,7 +41,20 @@ public class Test : MonoBehaviour
         {
             pathFinding.GetGrid().GetXY(pos, out int x, out int y);
             pathFinding.GetNode(x, y).isWalkable = !pathFinding.GetNode(x, y).isWalkable;
-        }*/
+            _tileMap.SetTileMapTile(pos, tiles[1]);
+        }
+    }
+
+    private void LineGrids()
+    {
+        for (int x = 0; x < 5; x++)
+        {
+            for (int y = 0; y < 5; y++)
+            {
+                Debug.Log(pathFinding.GetNode(x, y).isWalkable);
+                pathFinding.GetNode(x, y).isWalkable = _tileMap.GetTile(x, y).Walkable;
+            }
+        }
     }
 }
 
@@ -76,40 +87,5 @@ public class HeatMapGridObject
     public override string ToString()
     {
         return value.ToString();
-    }
-}
-
-public class StringGridObject
-{
-    private Grid<StringGridObject> grid;
-    private int x;
-    private int y;
-    private string letters;
-    private string numbers;
-
-    public StringGridObject(Grid<StringGridObject> grid, int x, int y)
-    {
-        this.grid = grid;
-        this.x = x;
-        this.y = y;
-        letters = "";
-        numbers = "";
-    }
-    
-    public void AddLetter(String letter)
-    {
-        letters += letter;
-        grid.TriggerGridObjectChanged(x, y);
-    }
-
-    public void AddNumber(String number)
-    {
-        numbers += number;
-        grid.TriggerGridObjectChanged(x, y);
-        
-    }
-    public override string ToString()
-    {
-        return letters + "\n" + numbers;
     }
 }

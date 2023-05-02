@@ -6,18 +6,25 @@ public class TileMap
 {
     private Grid<BaseTile> grid;
     private Tile grassTile;
+    private Tile[, ] tileGrid;
     public TileMap(int width, int height)
     {
         grid = new Grid<BaseTile>(width, height, 10f, Vector3.zero,
             (Grid<BaseTile> g, int x, int y) => new BaseTile(g, x, y));
+
+        tileGrid = new Tile[width, height];
     }
 
     public void SetTileMapTile(Vector3 pos, Tile tileSprite)
     {
         BaseTile baseTile = grid.GetGridObject(pos);
+        Vector3 temp = pos / 10f - Vector3.one / 5f;
         if (baseTile != null)
         {
-            baseTile.SetTileSprite(tileSprite, grassTile);
+            Tile newTile = baseTile.SetTileSprite(tileSprite, grassTile);
+            Debug.Log(newTile + " " + (int)temp.x + " " + (int)temp.y);
+            tileGrid[(int)temp.x, (int)temp.y] = newTile;
+
         }
     }
 
@@ -32,4 +39,10 @@ public class TileMap
             }
         }
     }
+    
+    public Tile GetTile(int x, int y)
+    {
+        return tileGrid[x, y];
+    }
+    
 }

@@ -17,15 +17,17 @@ public class BaseTile
         this.y = y;
     }
 
-    public void SetTileSprite(Tile tileSprite, Tile tile)
+    public Tile SetTileSprite(Tile tileSprite, Tile tile)
     {
-        this._tile = GameObject.Instantiate(tileSprite, new Vector3(x, y)* 10f + Vector3.one * 5f, Quaternion.identity) as Tile;
+        Tile tempTile = GameObject.Instantiate(tileSprite, new Vector3(x, y)* 10f + Vector3.one * 5f, Quaternion.identity) as Tile;
         grid.TriggerGridObjectChanged(x, y);
+        _tile = tempTile;
+        return tempTile;
     }
 
     public override string ToString()
     {
-        return "Hello";
+        return "";
     }
 
     public enum TileSprite
