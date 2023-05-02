@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Units;
@@ -5,14 +6,12 @@ using UnityEngine;
 
 public class BaseTile
 {
-    private Grid<BaseTile> grid;
     public int x;
     public int y;
     private Tile _tile;
 
     public BaseTile(Grid<BaseTile> grid, int x, int y)
     {
-        this.grid = grid;
         this.x = x;
         this.y = y;
     }
@@ -20,7 +19,6 @@ public class BaseTile
     public Tile SetTileSprite(Tile tileSprite, Tile tile)
     {
         Tile tempTile = GameObject.Instantiate(tileSprite, new Vector3(x, y)* 10f + Vector3.one * 5f, Quaternion.identity) as Tile;
-        grid.TriggerGridObjectChanged(x, y);
         _tile = tempTile;
         return tempTile;
     }
@@ -35,4 +33,23 @@ public class BaseTile
         None, 
         Grass,
     }
+    
+    public SaveTiles SaveTile()
+    {
+        Debug.Log("Saving " + x + " " + y);
+        return new SaveTiles()
+        {
+            x = x,
+            y = y,
+        };
+    }
 }
+
+[Serializable]
+public class SaveTiles
+{
+    public int x;
+    public int y;
+}
+
+

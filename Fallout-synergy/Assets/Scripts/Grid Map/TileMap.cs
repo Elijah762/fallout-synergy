@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UI_Elements;
 
 public class TileMap
 {
@@ -22,7 +23,6 @@ public class TileMap
         if (baseTile != null)
         {
             Tile newTile = baseTile.SetTileSprite(tileSprite, grassTile);
-            Debug.Log(newTile + " " + (int)temp.x + " " + (int)temp.y);
             tileGrid[(int)temp.x, (int)temp.y] = newTile;
 
         }
@@ -30,9 +30,9 @@ public class TileMap
 
     public void SetMap(List<Tile> tiles)
     {
-        for (int x = 0; x < grid.GetHeight(); x++)
+        for (int x = 0; x < grid.GetWidth(); x++)
         {
-            for (int y = 0; y < grid.GetWidth(); y++)
+            for (int y = 0; y < grid.GetHeight(); y++)
             {
                 int randomIndex = Random.Range(0, tiles.Count);
                 SetTileMapTile(new Vector3(x, y) * 10f + Vector3.one * 5f, tiles[randomIndex]);
@@ -44,5 +44,19 @@ public class TileMap
     {
         return tileGrid[x, y];
     }
-    
+
+    public void Save()
+    {
+        List<SaveTiles> tileSaveList = new List<SaveTiles>();
+        for (int x = 0; x < grid.GetWidth(); x++)
+        {
+            for (int y = 0; y < grid.GetHeight(); y++)
+            {
+                BaseTile baseTile = grid.GetGridObject(x, y);
+                tileSaveList.Add(baseTile.SaveTile());
+            }
+        }
+        
+        Save_Load.SaveObject(tileSaveList.ToArray());
+    }
 }

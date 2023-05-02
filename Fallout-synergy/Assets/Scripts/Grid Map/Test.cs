@@ -43,6 +43,12 @@ public class Test : MonoBehaviour
             pathFinding.GetNode(x, y).isWalkable = !pathFinding.GetNode(x, y).isWalkable;
             _tileMap.SetTileMapTile(pos, tiles[1]);
         }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            _tileMap.Save();
+            Debug.Log("Saved");
+        }
     }
 
     private void LineGrids()
