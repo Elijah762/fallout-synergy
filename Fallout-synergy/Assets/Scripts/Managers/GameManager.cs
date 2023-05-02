@@ -10,7 +10,23 @@ using Random = UnityEngine.Random;
 public class GameManager : MonoBehaviour
 {
     public string firstLevel;
-    public static GameManager Instance;
+
+    public static GameManager Instance
+    {
+        get
+        {
+            if (instance == null)
+                instance = FindObjectOfType(typeof(GameManager)) as GameManager;
+ 
+            return instance;
+        }
+        set
+        {
+            instance = value;
+        }
+    }
+    private static GameManager instance;
+    
     [SerializeField] private Camera _camera;
     [SerializeField] private int width;
     [SerializeField] private int height;
@@ -20,12 +36,12 @@ public class GameManager : MonoBehaviour
     private int heroLocY;
     private int enemyLocX;
     private int enemyLocY;
-    private PathFinding pathFinding;
+    public PathFinding pathFinding;
     private TileMap _tileMap;
     
     
     void Awake() {
-        Instance = this;
+        
     }
 
     public void GenerateGrid()
@@ -34,12 +50,13 @@ public class GameManager : MonoBehaviour
         _tileMap.SetMap(tiles);
         _camera.transform.position = new Vector3((float)5/2 -0.5f, (float)5 / 2 - 0.5f,-10);
         pathFinding = new PathFinding(width, height);
-
+        
         StateManager.Instance.ChangeState(GameStateOptions.SpawnChamps);
     }
 
     private void Update()
     {
+        Instance = this;
         Vector3 pos = UserInput.GetMouseWorldPosition(_camera);
         if (Input.GetMouseButtonDown(0))
         {
@@ -52,13 +69,6 @@ public class GameManager : MonoBehaviour
                     Debug.DrawLine(new Vector3(path[i].x, path[i].y) * 10f + Vector3.one * 5f, new Vector3(path[i + 1].x, path[i + 1].y) * 10f + Vector3.one * 5f, Color.green, 5f);
                 }
             }
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            pathFinding.GetGrid().GetXY(pos, out int x, out int y);
-            pathFinding.GetNode(x, y).isWalkable = !pathFinding.GetNode(x, y).isWalkable;
-            _tileMap.SetTileMapTile(pos, tiles[1]);
         }
 
         if (Input.GetKeyDown(KeyCode.S))
@@ -112,5 +122,12 @@ public class GameManager : MonoBehaviour
                 pathFinding.GetNode(x, y).isWalkable = _tileMap.GetTile(x, y).isWalkable;
             }
         }
+    }
+
+    public List<PathNode> GetPath(Vector3 pos, int startX, int startY)
+    {
+        pathFinding.GetGrid().GetXY(pos, out int x, out int y);
+        List<PathNode> path= pathFinding.FindPath(startX, startY, x, y);
+        return path;
     }
 } 

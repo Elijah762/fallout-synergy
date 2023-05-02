@@ -26,7 +26,6 @@ public class BaseTile
         }
         else
         {
-            GameObject.Destroy(_tile);
             Tile tempTile = 
                 GameObject.Instantiate(tile, new Vector3(x, y) * 10f + Vector3.one * 5f, Quaternion.identity) as Tile;
             _tile = tempTile;
@@ -42,22 +41,12 @@ public class BaseTile
     {
         _tile.occupiedUnit = unit;
     }
-
-    public void Delete()
-    { 
-        GameObject.Destroy(_tile);
-    }
+    
     public override string ToString()
     {
         return "";
     }
 
-    public enum TileSprite
-    {
-        None, 
-        Grass,
-    }
-    
     public SaveTiles SaveTile()
     {
         Debug.Log("Saving " + x + " " + y);

@@ -14,6 +14,11 @@ public class TileMap
             (Grid<BaseTile> g, int x, int y) => new BaseTile(g, x, y));
     }
     
+    public Grid<BaseTile> GetGrid()
+    {
+        return grid;
+    }
+    
     public void SetMap(List<Tile> tiles)
     {
         for (int x = 0; x < grid.GetWidth(); x++)
@@ -25,18 +30,7 @@ public class TileMap
             }
         }
     }
-    
-    public void DestroyMap()
-    {
-        for (int x = 0; x < grid.GetWidth(); x++)
-        {
-            for (int y = 0; y < grid.GetHeight(); y++)
-            {
-                DestroyTile(new Vector3(x, y) * 10f + Vector3.one * 5f);
-            }
-        }
-    }
-    
+
     public void SetTileMapTile(Vector3 pos, Tile tileSprite)
     {
         BaseTile baseTile = grid.GetGridObject(pos);
@@ -45,13 +39,7 @@ public class TileMap
             baseTile.SetTileSprite(tileSprite);
         }
     }
-    
-    public void DestroyTile(Vector3 pos)
-    {
-        BaseTile baseTile = grid.GetGridObject(pos);
-        baseTile.Delete();
-    }
-    
+
     public Tile GetTile(int x, int y)
     {
         BaseTile baseTile = grid.GetGridObject(x, y);
@@ -63,6 +51,12 @@ public class TileMap
         Debug.Log("Setting hero at " + x + ", " + y);
         BaseTile baseTile = grid.GetGridObject(x, y);
         baseTile.SetTileUnit(unit);
+    }
+
+    public BaseUnit GetTileUnit(int x, int y)
+    {
+        BaseTile baseTile = grid.GetGridObject(x, y);
+        return baseTile.GetTile().occupiedUnit;
     }
 
     public void Save()

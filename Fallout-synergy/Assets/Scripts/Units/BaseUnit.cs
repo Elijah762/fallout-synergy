@@ -8,6 +8,8 @@ namespace Units
         public Faction Faction;
         public string UnitName;
         public int health;
+        public int x;
+        public int y;
 
         public void UpdateHealth(int damage)
         {
