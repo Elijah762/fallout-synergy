@@ -55,6 +55,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grass_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 8401554159861756414, guid: 656d4b73f6a0b4f60a11be591eb8ae54, type: 3}
+      propertyPath: m_Color.b
+      value: 0.29067284
+      objectReference: {fileID: 0}
+    - target: {fileID: 8401554159861756414, guid: 656d4b73f6a0b4f60a11be591eb8ae54, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8679245
+      objectReference: {fileID: 0}
+    - target: {fileID: 8401554159861756414, guid: 656d4b73f6a0b4f60a11be591eb8ae54, type: 3}
+      propertyPath: m_Color.r
+      value: 0.35976958
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 656d4b73f6a0b4f60a11be591eb8ae54, type: 3}
 --- !u!212 &848956730945157160 stripped
@@ -83,6 +95,7 @@ MonoBehaviour:
   _renderer: {fileID: 848956730945157160}
   _highlight: {fileID: 2229188486143825758}
   isWalkable: 1
+  isSolid: 0
   occupiedUnit: {fileID: 0}
   _baseColor: {r: 0.380429, g: 0.7830189, b: 0.39388475, a: 1}
   _offsetColor: {r: 0.34376115, g: 0.7075472, b: 0.35446075, a: 1}

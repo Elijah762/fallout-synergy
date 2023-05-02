@@ -10,15 +10,23 @@ public class Test : MonoBehaviour
     private Grid<StringGridObject> stringGrid;
     [SerializeField] private Camera _camera;
     private PathFinding pathFinding;
+    private TileMap _tileMap;
+    [SerializeField] private List<Tile> tiles;
     private void Start()
     {
-        pathFinding = new PathFinding(3, 3);
+        _tileMap = new TileMap(3, 3);
+        _tileMap.SetMap(tiles);
+        //pathFinding = new PathFinding(3, 3);
     }
 
     private void Update()
     {
         Vector3 pos = UserInput.GetMouseWorldPosition(_camera);
         if (Input.GetMouseButtonDown(0))
+        {
+            _tileMap.SetTileMapTile(pos, tiles[0]);
+        }
+        /*if (Input.GetMouseButtonDown(0))
         {
             pathFinding.GetGrid().GetXY(pos, out int x, out int y);
             List<PathNode> path= pathFinding.FindPath(0, 0, x, y);
@@ -35,7 +43,7 @@ public class Test : MonoBehaviour
         {
             pathFinding.GetGrid().GetXY(pos, out int x, out int y);
             pathFinding.GetNode(x, y).isWalkable = !pathFinding.GetNode(x, y).isWalkable;
-        }
+        }*/
     }
 }
 
