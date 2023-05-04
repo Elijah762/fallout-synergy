@@ -12,7 +12,7 @@ public class Lane : MonoBehaviour
     List<Note> notes = new List<Note>();
     public List<double> timeStamps = new List<double>();
     public static Lane Instance;
-    
+
     public Sprite defKeyUp;
     public Sprite defKeyDown;
     public bool canUpdate = true;
@@ -20,10 +20,15 @@ public class Lane : MonoBehaviour
     int spawnIndex = 0;
     int inputIndex = 0;
 
+    public GameObject normal;
+    public GameObject good;
+    public GameObject perfect;
+    public GameObject miss;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Instance = this;
     }
     public void SetTimeStamps(Melanchall.DryWetMidi.Interaction.Note[] array)
     {
@@ -65,7 +70,19 @@ public class Lane : MonoBehaviour
 
                     if (Math.Abs(audioTime - timeStamp) < marginOfError)
                     {
-                        Hit();
+                        GoodHit();
+                        Destroy(notes[inputIndex].gameObject);
+                        inputIndex++;
+                    }
+                    else if (Math.Abs(audioTime - timeStamp) < marginOfError * .75)
+                    {
+                        GreatHit();
+                        Destroy(notes[inputIndex].gameObject);
+                        inputIndex++;
+                    }
+                    else if(Math.Abs(audioTime - timeStamp) < marginOfError * .25)
+                    {
+                        PerfHit();
                         Destroy(notes[inputIndex].gameObject);
                         inputIndex++;
                     }
@@ -79,12 +96,24 @@ public class Lane : MonoBehaviour
             }
         }
     }
-    private void Hit()
+    private void GoodHit()
     {
-        ScoreManager.Hit();
+        //Instantiate(normal, normal.transform.position, normal.transform.rotation);
+        ScoreManager.Instance.Hit(1, "normal");
+    }
+    private void GreatHit()
+    {
+        //Instantiate(good, good.transform.position, good.transform.rotation);
+        ScoreManager.Instance.Hit(3, "good");
+    }
+    private void PerfHit()
+    {
+        //Instantiate(perfect, perfect.transform.position, perfect.transform.rotation);
+        ScoreManager.Instance.Hit(6, "perfect");
     }
     private void Miss()
     {
-        ScoreManager.Miss();
+        //Instantiate(miss, miss.transform.position, miss.transform.rotation);
+        ScoreManager.Instance.Miss();
     }
 }

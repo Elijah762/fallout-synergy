@@ -6,6 +6,8 @@ using Melanchall.DryWetMidi.Interaction;
 using System.IO;
 using UnityEngine.Networking;
 using System;
+using UnityEditor;
+using UnityEngine.UI;
 
 public class SongManager : MonoBehaviour
 {
@@ -16,12 +18,14 @@ public class SongManager : MonoBehaviour
     public double marginOfError; // in seconds
 
     public int inputDelayInMilliseconds;
-    
 
     public string fileLocation;
     public float noteTime;
     public float noteSpawnY;
     public float noteTapY;
+    
+    public GameObject results, endButton;
+    public Text percentHit, normalText, goodText, perfectText, missText, rankText, finalScoreText;
     public float noteDespawnY
     {
         get
@@ -34,6 +38,9 @@ public class SongManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        marginOfError = StartManager.difficulty;
+        fileLocation = StartManager.SelectedSong + ".mid";
+        
         Instance = this;
         if (Application.streamingAssetsPath.StartsWith("http://") || Application.streamingAssetsPath.StartsWith("https://"))
         {
@@ -98,6 +105,24 @@ public class SongManager : MonoBehaviour
 
     void Update()
     {
-        
+        if (!audioSource.isPlaying)
+        {
+            results.SetActive(true);
+            var perc = (ScoreManager.Instance.totalNotes -
+                          ScoreManager.Instance.missHits) / ScoreManager.Instance.totalNotes;
+            percentHit.text = perc.ToString("F1") + "%";
+            normalText.text = ScoreManager.Instance.normalHits.ToString();
+            goodText.text = ScoreManager.Instance.goodHits.ToString();
+            perfectText.text = ScoreManager.Instance.perfectHits.ToString();
+            missText.text = ScoreManager.Instance.missHits.ToString();
+            rankText.text = ScoreManager.Instance.getRank(perc);
+            finalScoreText.text = ScoreManager.Instance.comboScore.ToString();
+            endButton.SetActive(true);
+        }
+        else
+        {
+            results.SetActive(false);
+            endButton.SetActive(false);
+        }
     }
 }
