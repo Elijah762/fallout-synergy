@@ -67,4 +67,9 @@ public class StartManager : MonoBehaviour
         SelectedSong = music;
         SceneManager.LoadScene("GameSunrise");
     }
+
+    public void CursedButton()
+    {
+        SceneManager.LoadScene("Gridmap");
+    }
 }
